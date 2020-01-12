@@ -66,7 +66,14 @@ class FootballData {
         return json_decode($response)->matches;
     }
     
-   
+    public function tiemporeal($c, $m) {
+        $resource = 'competitions/' . $c . '/matches/?status=LIVE';
+
+        $response = file_get_contents($this->baseUri . $resource, false, 
+                                      stream_context_create($this->reqPrefs));
+        
+        return json_decode($response);
+    }
     public function buscarpartidoporid($id) {
         $resource = 'matches/' . $id;
         $response = file_get_contents($this->baseUri . $resource, false, 
